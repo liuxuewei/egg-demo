@@ -5,7 +5,7 @@ class News extends Subscription {
     static get schedule() {
         // 配置文档 https://github.com/eggjs/egg-schedule
         return {
-            interval: '1h', // 1小时间隔 单位，s、m、h、
+            interval: '5s', // 1小时间隔 单位，s、m、h、
             // 定时任务cron表达式： 
             // 秒(0 - 59)，分(0 - 59)，时(0 - 23)，日(1 - 31)，月(1 - 12)，星期(0 - 7) (0 or 7 is Sun)
             // eg: 每三小时准点执行一次
@@ -19,7 +19,7 @@ class News extends Subscription {
         const { ctx } = this;
         // TODO 获取头条新闻
         const headNews = [{
-            title: '第三届前端艺术家沙龙于10月24日成功举办',
+            title: '【前端头条】第三届前端艺术家沙龙于10月24日成功举办',
             text: '由阿里巴巴ICBU深圳前端艺术家团队主办的前端艺术家沙龙与10月24日举办，本次分享会邀请了行内知名讲师，与大家畅聊“前端职业成长”心得。',
             messageURL: 'https://artist.alibaba.com',
             picURL: 'https://img.alicdn.com/tfs/TB1bbLH2eL2gK0jSZPhXXahvXXa-2460-1020.png',
