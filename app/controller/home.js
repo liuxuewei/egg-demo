@@ -5,7 +5,8 @@ const Controller = require('egg').Controller;
 class HomeController extends Controller {
   async index() {
     const { ctx } = this;
-    ctx.body = 'hi, egg';
+    const params = ctx.query;
+    ctx.body = `hi, ${params.name || 'egg'}`;
   }
 }
 
