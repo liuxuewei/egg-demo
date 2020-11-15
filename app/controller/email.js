@@ -28,20 +28,22 @@ class EmailController extends Controller {
       date: '2020-10-24',
       text: '由阿里巴巴ICBU深圳前端艺术家团队主办的前端艺术家沙龙与10月24日举办，本次分享会邀请了行内知名讲师，与大家畅聊“前端职业成长”心得。'
   }
-    // 发送邮件
-    // const sendHtml = `<div>
-    //     <div style="border:1.0px solid #eeeeee;padding:10.0px; max-width: 800px;margin: 0 auto;">
-    //         <img style="margin-bottom: 10px; width: 100%;" src="${message.img}">
-    //         <h2 style="font-size: 14px; font-weight: blod">${message.title}</h2>
-    //         <p>时间：${message.date}</p>
-    //         <p>简介：${message.text}</p>
-    //     </div>
-    //     <div style="text-align: center;margin-top: 12px;">
-    //         <p >邮件声明：此邮件由 <strong>系统</strong> 发送，如有问题请联系邮箱：${message.from}</p>
-    //     </div>
-    // </div>`;
+    // 方法一，构建发送邮件内容
+    const sendHtml = `<div>
+        <div style="border:1.0px solid #eeeeee;padding:10.0px; max-width: 800px;margin: 0 auto;">
+            <img style="margin-bottom: 10px; width: 100%;" src="${message.img}">
+            <h2 style="font-size: 14px; font-weight: blod">${message.title}</h2>
+            <p>时间：${message.date}</p>
+            <p>简介：${message.text}</p>
+        </div>
+        <div style="text-align: center;margin-top: 12px;">
+            <p >邮件声明：此邮件由 <strong>系统</strong> 发送，如有问题请联系邮箱：${message.from}</p>
+        </div>
+    </div>`;
 
-    const sendHtml = await ctx.renderView('email/send-email.html', { message });
+    // 方法二，使用模版引擎构建发送邮件内容
+    // const sendHtml = await ctx.renderView('email/send-email.html', { message });
+
     var mailOptions = {
       // 发送邮件的地址
       from: message.from,
