@@ -18,6 +18,7 @@ const transporter = nodemailer.createTransport({
 });
 
 class EmailController extends Controller {
+  // http://localhost:7001/send-email
   async sendEmail() {
     const { ctx } = this;
     const message = {

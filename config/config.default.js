@@ -2,6 +2,8 @@
 
 'use strict';
 
+const path = require('path');
+
 /**
  * @param {Egg.EggAppInfo} appInfo app info
  */
@@ -18,13 +20,14 @@ module.exports = appInfo => {
   // add your middleware config here
   config.middleware = [];
 
-  // add your user config here
-  const userConfig = {
-    // myAppName: 'egg',
+  config.view = {
+    defaultViewEngine: 'nunjucks',
+    root: [
+      path.join(appInfo.baseDir, 'app/view'),
+    ].join(',')
   };
 
   return {
-    ...config,
-    ...userConfig,
+    ...config
   };
 };
