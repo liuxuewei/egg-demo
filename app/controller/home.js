@@ -9,7 +9,7 @@ class HomeController extends Controller {
     const params = ctx.query;
     ctx.body = `hi, ${params.name || 'egg'}`;
   }
-  //http://localhost:7001/index.htm?name=%3Cscript%3Ealert(1)%3C/script%3E%E9%A9%AC%E8%B7%83
+  //http://localhost:7001/index.htm?name=马跃
   async home() {
     const { ctx } = this;
     const params = ctx.query;

@@ -12,8 +12,6 @@ const transporter = nodemailer.createTransport({
   auth: {
       user: '1006724845@qq.com',
       pass: 'bosobffdllfqbbib'
-      // user: 'alibaba-test@qq.com',
-      // pass: 'lxw@24374988'
   }
 });
 
@@ -43,7 +41,7 @@ class EmailController extends Controller {
     </div>`;
     var mailOptions = {
       // 发送邮件的地址
-      from: message.from, // login user must equal to this user
+      from: message.from,
       // 接收邮件的地址
       to: message.to,
       // 邮件主题
