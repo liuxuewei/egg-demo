@@ -16,6 +16,7 @@ class News extends Subscription {
 
     // subscribe 是真正定时任务执行时被运行的函数
     async subscribe() {
+        const { ctx } = this;
         // TODO 获取头条新闻
         const headNews = [{
             title: '第三届前端艺术家沙龙于10月24日成功举办',
@@ -38,7 +39,7 @@ class News extends Subscription {
             }
         ];
         // 钉钉自定义机器人文档 https://ding-doc.dingtalk.com/doc#/serverapi2/qf2nxq/26eaddd5
-        const res = await this.ctx.curl('https://oapi.dingtalk.com/robot/send?access_token=e00613e4b184c97f677cc2be2cf366e321e326bf66204266a18d227df7a6fbff', {
+        const res = await ctx.curl('https://oapi.dingtalk.com/robot/send?access_token=e00613e4b184c97f677cc2be2cf366e321e326bf66204266a18d227df7a6fbff', {
             method: 'POST',
             headers: {
                 "content-type": "application/json"
@@ -63,7 +64,7 @@ class News extends Subscription {
             //     }
             // }
         });
-        this.ctx.logger.info('send news status', res.status);
+        ctx.logger.info('send news status', res.status);
     }
 }
 
