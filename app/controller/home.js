@@ -7,7 +7,16 @@ class HomeController extends Controller {
   async index() {
     const { ctx } = this;
     const params = ctx.query;
-    ctx.body = `hi, ${params.name || 'egg'}`;
+    ctx.body = `<p>hi, ${params.name || 'egg'}</p>`;
+  }
+  async sayHello() {
+    const { ctx } = this;
+    const params = ctx.query;
+    ctx.body = {
+      success: true,
+      message: '请求成功',
+      data: `hi, ${params.name || 'egg'}`
+    };
   }
   //http://localhost:7001/index.htm?name=马跃
   async home() {
