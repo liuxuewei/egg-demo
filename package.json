@@ -41,7 +41,7 @@
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "http://gitlab.alibaba-inc.com/mayue/egg-demo.git"
   },
   "author": "mayue",
   "license": "MIT"
