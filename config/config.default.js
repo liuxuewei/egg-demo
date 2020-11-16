@@ -27,10 +27,10 @@ module.exports = appInfo => {
   }
 
   config.view = {
-    defaultViewEngine: 'nunjucks',
-    root: [
-      path.join(appInfo.baseDir, 'app/view'),
-    ].join(',')
+    defaultViewEngine: 'nunjucks'
+    // root: [
+    //   path.join(appInfo.baseDir, 'app/view'),
+    // ].join(',')
   };
 
   return {
