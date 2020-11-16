@@ -5,7 +5,7 @@ class News extends Subscription {
     static get schedule() {
         // 配置文档 https://github.com/eggjs/egg-schedule
         return {
-            interval: '5s', // 1小时间隔 单位，s、m、h、
+            interval: '30m', // 间隔30分钟 单位，s、m、h、
             // 定时任务cron表达式： 
             // 秒(0 - 59)，分(0 - 59)，时(0 - 23)，日(1 - 31)，月(1 - 12)，星期(0 - 7) (0 or 7 is Sun)
             // eg: 每三小时准点执行一次

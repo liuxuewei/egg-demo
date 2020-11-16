@@ -18,7 +18,13 @@ module.exports = appInfo => {
   config.keys = appInfo.name + '_1605407793830_8026';
 
   // add your middleware config here
-  config.middleware = [];
+  config.middleware = [
+    'permission'
+  ];
+
+  config.permission = {
+    blackList: ['刘学炜']
+  }
 
   config.view = {
     defaultViewEngine: 'nunjucks',
