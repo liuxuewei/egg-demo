@@ -4,7 +4,7 @@ module.exports = options => {
         const params = ctx.query;
         const blackList = options.blackList || [];
         ctx.logger.info('blackList', blackList);
-        if(blackList.includes(params.name)){
+        if(blackList.indexOf(params.name) > -1){
             ctx.body = {
                 code: 403,
                 success: false,

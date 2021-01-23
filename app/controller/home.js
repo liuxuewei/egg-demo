@@ -7,6 +7,13 @@ class HomeController extends Controller {
   async index() {
     const { ctx } = this;
     const params = ctx.query;
+    // if(params.name='刘学炜'){
+    //   ctx.body = {
+    //     success: false,
+    //     message: '没有权限',
+    //     code: 403
+    //   };
+    // }
     ctx.body = `<p>hi, ${params.name || 'egg'}</p>`;
   }
   // http://localhost:7001/say-hello.json?name=马跃
@@ -38,7 +45,9 @@ class HomeController extends Controller {
     }
     // nunjucks 模版引擎 插件
     // npm install egg-view-nunjucks --save
-    await ctx.render('home.html', result);
+    this.body = await ctx.renderView('home.html', result);
+    // await ctx.render('home.html', result);
+    
   }
 }
 
