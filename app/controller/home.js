@@ -45,7 +45,7 @@ class HomeController extends Controller {
     }
     // nunjucks 模版引擎 插件
     // npm install egg-view-nunjucks --save
-    this.body = await ctx.renderView('home.html', result);
+    ctx.body = await ctx.renderView('home.html', result);
     // await ctx.render('home.html', result);
     
   }
