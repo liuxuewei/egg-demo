@@ -6,13 +6,10 @@ class HomeController extends Controller {
   // http://localhost:7001/
   async index() {
     const { ctx } = this;
-    const params = ctx.query;
-    
     ctx.session.visited = ctx.session.visited ? (ctx.session.visited + 1) : 1;
-
     const visited = ctx.session.visited;
     const userId = ctx.session.userId || 'guest';
-    ctx.body = `hi, ${params.name || 'egg'}, traceId: ${ctx.traceId}，visited：${visited}，userId: ${userId}`;
+    ctx.body = `hi, ${userId || 'guest'}, traceId: ${ctx.traceId}，visited：${visited}`;
   }
   // http://localhost:7001/say-hello.json?name=马跃
   // http://localhost:7001/say-hello.json?name=刘学炜
