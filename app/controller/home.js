@@ -7,32 +7,33 @@ class HomeController extends Controller {
   async index() {
     const { ctx } = this;
     const params = ctx.query;
-    // if(params.name='刘学炜'){
-    //   ctx.body = {
-    //     success: false,
-    //     message: '没有权限',
-    //     code: 403
-    //   };
-    // }
-    ctx.body = `<p>hi, ${params.name || 'egg'}</p>`;
+    
+    ctx.session.visited = ctx.session.visited ? (ctx.session.visited + 1) : 1;
+
+    const visited = ctx.session.visited;
+    const userId = ctx.session.userId || 'guest';
+    ctx.body = `hi, ${params.name || 'egg'}, traceId: ${ctx.traceId}，visited：${visited}，userId: ${userId}`;
   }
   // http://localhost:7001/say-hello.json?name=马跃
   // http://localhost:7001/say-hello.json?name=刘学炜
-  async sayHello() {
+  async login() {
     const { ctx } = this;
     const params = ctx.query;
-    // if(params.name='刘学炜'){
-    //   ctx.body = {
-    //     success: false,
-    //     message: '没有权限',
-    //     code: 403
-    //   };
-    // }
+    // 设置session
+    console.log(params);
+    
+    let login = false;
+    if(params.id){
+      ctx.session.userId = params.id;
+      ctx.session.visited = 1;
+      login = true;
+    }
     ctx.body = {
-      success: true,
-      message: '请求成功',
-      data: `hi, ${params.name || 'egg'}`
+      success: login,
+      message: login ? '登录成功' : '登录失败',
+      data: `hi, ${params.id || 'guest'}`
     };
+    
   }
   //http://localhost:7001/index.htm?name=马跃
   //http://localhost:7001/index.htm?name=刘学炜
@@ -41,13 +42,12 @@ class HomeController extends Controller {
     const params = ctx.query;
     const result = {
       name: params.name || 'egg',
-      title: '前端练习生'
-    }
+      title: '前端练习生',
+    };
     // nunjucks 模版引擎 插件
     // npm install egg-view-nunjucks --save
-    ctx.body = await ctx.renderView('home.html', result);
-    // await ctx.render('home.html', result);
-    
+    // ctx.body = await ctx.renderView('home.html', result);
+    await ctx.render('home.html', result);
   }
 }
 

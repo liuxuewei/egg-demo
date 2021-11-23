@@ -19,12 +19,20 @@ module.exports = appInfo => {
 
   // add your middleware config here
   config.middleware = [
+    'trace',
     'permission'
   ];
 
   config.permission = {
-    blackList: ['刘学炜']
-  }
+    blackList: ['刘学炜', '小明']
+  };
+
+  config.session = {
+    key: 'EGG_SESS',
+    maxAge: 24 * 3600 * 1000, // ms、'session'
+    httpOnly: true,
+    encrypt: true,
+  };
 
   config.view = {
     defaultViewEngine: 'nunjucks'
@@ -32,6 +40,7 @@ module.exports = appInfo => {
     //   path.join(appInfo.baseDir, 'app/view'),
     // ].join(',')
   };
+
 
   return {
     ...config

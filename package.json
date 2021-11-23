@@ -9,7 +9,10 @@
   "dependencies": {
     "egg": "^2.15.1",
     "egg-scripts": "^2.11.0",
+    "egg-session": "^3.3.0",
+    "egg-tracer": "^1.1.0",
     "egg-view-nunjucks": "^2.2.0",
+    "jar2proxy": "^1.0.7",
     "nodemailer": "^6.4.11"
   },
   "devDependencies": {
@@ -28,6 +31,7 @@
     "start": "egg-scripts start --daemon --title=egg-server-demo",
     "stop": "egg-scripts stop --title=egg-server-demo",
     "dev": "egg-bin dev",
+    "proxy": "jar2proxy",
     "debug": "egg-bin debug",
     "test": "npm run lint -- --fix && npm run test-local",
     "test-local": "egg-bin test",
