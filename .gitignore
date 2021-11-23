@@ -13,5 +13,6 @@ run/
 typings/
 .nyc_output/
 libs/
-app/proxy
-app/proxy_class
+app/proxy/
+app/proxy_class/
+config/proxy-cfg/
