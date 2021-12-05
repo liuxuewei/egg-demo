@@ -12,7 +12,7 @@ run/
 *.un~
 typings/
 .nyc_output/
-libs/
-app/proxy/
-app/proxy_class/
-config/proxy-cfg/
+libs/*
+app/proxy/*
+app/proxy_class/*
+config/proxy-cfg/*
