@@ -8,7 +8,7 @@ module.exports = {
     group: 'HSF',
     version: '1.0.0',
     uniqueId: 'uniqueId',
-    tpl: 'proxy.js.tpl',
+    tpl: path.join(__dirname, 'proxy.js.tpl'),
     method: {},
     responseTimeout: 10000,
     services: require('fs').readdirSync(`${__dirname}/proxy-cfg/`)
