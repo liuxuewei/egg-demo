@@ -11,6 +11,8 @@ class HomeController extends Controller {
     ctx.session.visited = ctx.session.visited ? (ctx.session.visited + 1) : 1;
     const visited = ctx.session.visited;
     const userId = ctx.session.userId || 'guest';
+    ctx.logger.info('userId:%s', userId);
+    // const result = await ctx.proxy.iMonetouchCommunityRemoteService.getMotRolesByAliId(123456);
     ctx.set('content-type', 'text/html');
     ctx.body = `<p style="color:red;">hi, ${userId || 'guest'}, traceId: ${ctx.traceId}，visited：${visited}</p><script>console.log("xss success");</script>`;
   }
@@ -20,14 +22,17 @@ class HomeController extends Controller {
     const { ctx } = this;
     const params = ctx.query;
     // 设置session
-    console.log(params);
 
     let login = false;
     if (params.id) {
+      ctx.userId = params.id;
       ctx.session.userId = params.id;
       ctx.session.visited = 1;
       login = true;
     }
+    
+    ctx.logger.info('params:%j', params);
+
     ctx.body = {
       success: login,
       message: login ? '登录成功' : '登录失败',

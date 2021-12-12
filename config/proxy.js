@@ -10,7 +10,7 @@ module.exports = {
     uniqueId: 'uniqueId',
     tpl: path.join(__dirname, 'proxy.js.tpl'),
     method: {},
-    responseTimeout: 10000,
+    responseTimeout: 5000,
     services: require('fs').readdirSync(`${__dirname}/proxy-cfg/`)
     .filter(name => name.match(/.js$/))
     .map(name => require(`${__dirname}/proxy-cfg/${name}`)),

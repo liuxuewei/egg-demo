@@ -8,6 +8,11 @@
 
 see [egg docs][egg] for more detail.
 
+### generator
+npm i egg-init -g
+
+egg-init --type=simple
+
 ### Development
 
 ```bash

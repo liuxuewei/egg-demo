@@ -19,12 +19,13 @@ module.exports = appInfo => {
 
   // add your middleware config here
   config.middleware = [
+    'user',
     'trace',
-    'permission'
+    'permission',
   ];
 
   config.permission = {
-    blackList: ['刘学炜', '小明']
+    blackList: [ '刘学炜', '小明' ],
   };
 
   config.session = {
@@ -35,14 +36,17 @@ module.exports = appInfo => {
   };
 
   config.view = {
-    defaultViewEngine: 'nunjucks'
+    defaultViewEngine: 'nunjucks',
     // root: [
     //   path.join(appInfo.baseDir, 'app/view'),
     // ].join(',')
   };
 
+  config.logger = {
+    dir: `${appInfo.root}/logs/${appInfo.name}`,
+  };
 
   return {
-    ...config
+    ...config,
   };
 };
