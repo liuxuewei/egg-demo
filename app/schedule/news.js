@@ -6,8 +6,8 @@ class News extends Subscription {
   static get schedule() {
     // 配置文档 https://github.com/eggjs/egg-schedule
     return {
-      interval: '30m', // 间隔30分钟 单位，s、m、h、
-      // 定时任务cron表达式： 
+      interval: '5s', // 间隔30分钟 单位，s、m、h、
+      // 定时任务cron表达式：
       // 秒(0 - 59)，分(0 - 59)，时(0 - 23)，日(1 - 31)，月(1 - 12)，星期(0 - 7) (0 or 7 is Sun)
       // eg: 每三小时准点执行一次
       //cron: '0 0 */3 * * *',
@@ -29,29 +29,29 @@ class News extends Subscription {
     const messages = [
       ...headNews,
       {
-        "title": "图片加载失败后CSS样式处理最佳实践", 
-        "messageURL": "https://www.zhangxinxu.com/wordpress/2020/10/css-style-image-load-fail/", 
-        "picURL": "https://image.zhangxinxu.com/image/blog/202010/2020-10-24_193506.png"
+        title: '图片加载失败后CSS样式处理最佳实践',
+        messageURL: 'https://www.zhangxinxu.com/wordpress/2020/10/css-style-image-load-fail/',
+        picURL: 'https://image.zhangxinxu.com/image/blog/202010/2020-10-24_193506.png'
       },
       {
-        "title": "我的前端成长之路", 
-        "messageURL": "https://juejin.im/post/6889239308201361416", 
-        "picURL": "https://img.alicdn.com/tfs/TB1BKb0qBFR4u4jSZFPXXanzFXa-1492-938.png"
+        title: '我的前端成长之路',
+        messageURL: 'https://juejin.im/post/6889239308201361416',
+        picURL: 'https://img.alicdn.com/tfs/TB1BKb0qBFR4u4jSZFPXXanzFXa-1492-938.png'
       }
     ];
     // 钉钉自定义机器人文档 https://ding-doc.dingtalk.com/doc#/serverapi2/qf2nxq/26eaddd5
-    const res = await ctx.curl('https://oapi.dingtalk.com/robot/send?access_token=e00613e4b184c97f677cc2be2cf366e321e326bf66204266a18d227df7a6fbff', {
+    const res = await ctx.curl('https://oapi.dingtalk.com/robot/send?access_token=4e99a08b02a26a4995c2284d9e7094b51c2e925a4e207997478111491589559b', {
       method: 'POST',
       headers: {
-        "content-type": "application/json"
+        'content-type': 'application/json'
       },
-      data: 
+      data:
             {
-              "msgtype": "feedCard",
-              "feedCard": {
-                "links": messages
-              }
-            }
+              msgtype: 'feedCard',
+              feedCard: {
+                links: messages,
+              },
+            },
             // {
             //     "msgtype": "actionCard",
             //     "actionCard": {
