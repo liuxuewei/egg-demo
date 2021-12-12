@@ -1,7 +1,7 @@
 'use strict';
 
 const Controller = require('egg').Controller;
-const nodemailer = require("nodemailer");
+const nodemailer = require('nodemailer');
 // 定义邮件服务器服，个人建议使用QQ邮箱
 const transporter = nodemailer.createTransport({
   host: 'smtp.qq.com',
@@ -9,9 +9,9 @@ const transporter = nodemailer.createTransport({
   secure: true,
   // 我们需要登录到网页邮箱中，然后配置SMTP和POP3服务器的密码
   auth: {
-      user: '1000@qq.com',
-      pass: 'xxx'
-  }
+    user: '1000@qq.com',
+    pass: 'xxx',
+  },
 });
 
 
@@ -27,8 +27,8 @@ class EmailController extends Controller {
       img: 'https://img.alicdn.com/tfs/TB1bbLH2eL2gK0jSZPhXXahvXXa-2460-1020.png',
       title: '第三届前端艺术家沙龙于10月24日成功举办',
       date: '2020-10-24',
-      text: '由阿里巴巴ICBU深圳前端艺术家团队主办的前端艺术家沙龙与10月24日举办，本次分享会邀请了行内知名讲师，与大家畅聊“前端职业成长”心得。'
-  }
+      text: '由阿里巴巴ICBU深圳前端艺术家团队主办的前端艺术家沙龙与10月24日举办，本次分享会邀请了行内知名讲师，与大家畅聊“前端职业成长”心得。',
+    };
     // 方法一，构建发送邮件内容
     // const sendHtml = `<div>
     //     <div style="border:1.0px solid #eeeeee;padding:10.0px; max-width: 800px;margin: 0 auto;">
@@ -45,7 +45,7 @@ class EmailController extends Controller {
     // 方法二，使用模版引擎构建发送邮件内容
     const sendHtml = await ctx.renderView('email/send-email.html', { message });
 
-    var mailOptions = {
+    const mailOptions = {
       // 发送邮件的地址
       from: message.from,
       // 接收邮件的地址
@@ -53,7 +53,7 @@ class EmailController extends Controller {
       // 邮件主题
       subject: '阿里练习生头条',
       // 以HTML的格式显示，这样可以显示图片、链接、字体颜色等信息
-      html: sendHtml
+      html: sendHtml,
     };
     // 发送邮件，并有回调函数
     try {
@@ -64,7 +64,7 @@ class EmailController extends Controller {
       return;
     }
     ctx.body = sendHtml;
-    
+
   }
 }
 
