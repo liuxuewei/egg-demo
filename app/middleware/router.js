@@ -3,7 +3,7 @@
 
 const { NodeVM } = require('vm2');
 
-const db = require('./db.json');
+const db = require('./db');
 
 const matchLocalRouter = ctx => {
   // match这个方法文档没写，参考：https://github.com/eggjs/egg-router/blob/master/lib/router.js#L485
@@ -22,8 +22,9 @@ const matchLocalRouter = ctx => {
 
 module.exports = options => {
   return async function router(ctx, next) {
-    const matchRouterResult = matchLocalRouter(ctx);
-    if (matchRouterResult) {
+    const isMatchLocalRouter = matchLocalRouter(ctx);
+    ctx.logger.info('isMatchLocalRouterResult:%j', isMatchLocalRouter);
+    if (isMatchLocalRouter) {
       return await next();
     }
     const browserParams = (ctx.request.method === 'POST' ? ctx.request.body : ctx.request.query) || {};
@@ -31,9 +32,9 @@ module.exports = options => {
       $ctx: ctx,
       $browserParams: { ...browserParams },
     };
-    const matchUrl = db.find(({ router }) => router === ctx.path);
-    ctx.logger.info('matchUrl:%j', matchUrl);
-    if (matchUrl) {
+    const matchDBRouter = db.find(({ router }) => router === ctx.path);
+    ctx.logger.info('isMatchDBRouter:%j', matchDBRouter);
+    if (matchDBRouter) {
       try {
         const vm = new NodeVM({
           sandbox,
@@ -44,7 +45,7 @@ module.exports = options => {
           },
           wrapper: 'none',
         });
-        const result = await vm.run(`return (async function(){${matchUrl.code}\n}).bind($ctx)();`, 'vm.js');
+        const result = await vm.run(`return (async function(){${matchDBRouter.code}\n}).bind($ctx)();`, 'vm.js');
         ctx.body = {
           code: 0,
           data: result,
@@ -63,5 +64,6 @@ module.exports = options => {
         message: '请求失败，没有找到相关资源',
       };
     }
+    return await next();
   };
 };

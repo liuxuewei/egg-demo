@@ -28,6 +28,10 @@ module.exports = appInfo => {
     blackList: ['刘学炜', '小明'],
   };
 
+  config.userInterceptor = {
+    whiteList: [ '/', /\/login/i, /\/public/ ],
+  };
+
   config.session = {
     key: 'EGG_SESS',
     maxAge: 24 * 3600 * 1000, // ms、'session'
