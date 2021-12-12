@@ -10,5 +10,9 @@ module.exports = {
     enable: true,
     package: 'egg-tracer',
   },
-  session: true
+  userInterceptor: {
+    enable: true,
+    package: 'egg-user-interceptor',
+  },
+  session: true,
 };

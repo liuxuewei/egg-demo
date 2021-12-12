@@ -3,7 +3,7 @@
 
 module.exports = options => {
   return async function user(ctx, next) {
-    ctx.logger.info(`===== ${ctx.userId} visited =====`);
+    ctx.logger.info(`===== ${ctx.userId || null} visited =====`);
     await next();
   };
 };

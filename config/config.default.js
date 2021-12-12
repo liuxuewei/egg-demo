@@ -46,6 +46,14 @@ module.exports = appInfo => {
     dir: `${appInfo.root}/logs/${appInfo.name}`,
   };
 
+  config.security = {
+    csrf: {
+      headerName: 'x-csrf-token', // 通过 header 传递 CSRF token 的默认字段为 x-csrf-token
+      queryName: 'csrfToken', // 设置通过 query 传递 CSRF token 的默认字段为 csrfToken
+      bodyName: 'csrfToken', // 设置通过 body 传递 CSRF token 的默认字段为 csrfToken
+    },
+  };
+
   return {
     ...config,
   };
