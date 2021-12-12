@@ -1,6 +1,7 @@
 'use strict';
 const Controller = require('egg').Controller;
 
+
 class HomeController extends Controller {
   // http://localhost:7001/
   async index() {
