@@ -51,6 +51,67 @@ class HomeController extends Controller {
     // ctx.body = await ctx.renderView('home.html', result);
     await ctx.render('home.html', result);
   }
+  async drawImage() {
+    const pannel = { width: 500, height: 889.25 };
+    const processorList = [
+      { type: 'IMAGE', url: '{{ avatar }}', width: 202, height: 202, x: 145, y: 262 },
+      { type: 'IMAGE', url: '{{ bgImage }}', ...pannel, x: 0, y: 0 },
+      {
+        type: 'TEXT',
+        text: '{{ employeeName }}',
+        fontFamily: 'Alibaba-PuHuiTi-Bold',
+        fontSize: 40,
+        lineHeight: 40,
+        color: '#fad877',
+        textAlign: 'center',
+        with: pannel.width,
+        x: 0,
+        y: 470,
+      },
+      {
+        type: 'TEXT',
+        text: '{{ partnerName }}',
+        fontSize: 20,
+        lineHeight: 20,
+        color: '#fad877',
+        textAlign: 'center',
+        with: pannel.width,
+        x: 0,
+        y: 530,
+      },
+      {
+        type: 'TEXT',
+        text: '破{{ gmv }}万',
+        fontSize: 50,
+        lineHeight: 50,
+        color: '#fad877',
+        textAlign: 'center',
+        with: pannel.width,
+        x: 0,
+        y: 750,
+      },
+    ];
+    const renderedProcessorsString = await this.ctx.renderString(
+      JSON.stringify(processorList),
+      {
+        partnerName: '供应商1号',
+        employeeName: '马跃',
+        gmv: '100',
+        bgImage: 'https://img.alicdn.com/imgextra/i3/O1CN012ihksh1ycqhxUxJRF_!!6000000006600-0-tps-750-1232.jpg',
+        avatar: 'https://sc01.alicdn.com/kf/H6cc42410f796474a8beb23f6ffed75b9i.jpg',
+      }
+    );
+
+    const configs = {
+      meta: { ...pannel, mineType: 'image/jpeg', bgColor: '', pixelRatio: 2 },
+      processors: JSON.parse(renderedProcessorsString),
+    };
+    console.log('configs', configs);
+    const buffer = await this.service.draw.parallel(configs);
+    this.ctx.set('content-type', configs.meta.mineType || 'image/png');
+    this.ctx.set('content-length', `${buffer.length}`);
+    this.ctx.body = buffer;
+  }
 }
 
 module.exports = HomeController;

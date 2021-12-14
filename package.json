@@ -14,7 +14,9 @@
     "egg-view-nunjucks": "^2.2.0",
     "egg-user-interceptor": "^1.0.0",
     "jar2proxy": "^1.0.7",
-    "nodemailer": "^6.4.11"
+    "nodemailer": "^6.4.11",
+    "canvas-text-node": "^1.0.0",
+    "canvas": "^2.6.1"
   },
   "devDependencies": {
     "autod": "^3.0.1",
