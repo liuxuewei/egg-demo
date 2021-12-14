@@ -59,7 +59,6 @@ class HomeController extends Controller {
       {
         type: 'TEXT',
         text: '{{ employeeName }}',
-        fontFamily: 'Alibaba-PuHuiTi-Bold',
         fontSize: 40,
         lineHeight: 40,
         color: '#fad877',
