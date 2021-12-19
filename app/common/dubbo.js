@@ -3,7 +3,7 @@
 const { Dubbo, java, setting } = require('apache-dubbo-js');
 // const { Dubbo, java, setting } = require('dubbo2.js');
 const { dubboInvoker, matcher } = require('dubbo-invoker');
-const interfaceName = 'com.dll.dubbo.api.service.AnnotationService';
+const interfaceName = 'com.dubbo.learn.dubbo.TestProviderService';
 const interfaceVersion = '1.0.0';
 
 const dubboSetting = setting.match(
@@ -53,10 +53,10 @@ dubbo.use(async function costTime(ctx, next) {
 dubbo.use(
   dubboInvoker(
     matcher
-      .match(interfaceName, { version: '1.0.0'})
+      .match(interfaceName, { version: '1.0.0' })
       // .match('com.alibaba.dubbo.demo.DemoProvider', {version: '1.0.0'})
       // .match('com.alibaba.dubbo.demo.ErrorProvider', {version: '1.0.0'}),
-  ),
+  )
 );
 module.exports = dubbo;
 

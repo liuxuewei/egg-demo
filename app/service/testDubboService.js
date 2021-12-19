@@ -1,29 +1,64 @@
 'use strict';
-const nzd = require('node-zookeeper-dubbo');
 const Service = require('egg').Service;
+const { Dubbo, java, setting } = require('apache-dubbo-js');
+const { dubboInvoker, matcher } = require('dubbo-invoker');
+const interfaceName = 'com.dubbo.learn.dubbo.TestProviderService';
+const interfaceVersion = '1.0.0';
 
-const opt = {
-  java: require('js-to-java'),
-  application: { name: 'dubbo-consumer' },
-  register: '127.0.0.1:2181',
-  dubboVer: '2.5.3',
-  dependencies: {
-    AnnotationService: {
-      interface: 'com.dll.dubbo.api.service.AnnotationService',
-      version: '1.0.0',
-      timeout: 5000,
-      methodSignature: {
-        sayHello: name => [{ $class: 'java.lang.String', $: name }],
+const dubboSetting = setting.match(
+  interfaceName, { version: '1.0.0' }
+);
+
+const dubboService = dubbo =>
+  dubbo.proxyService({
+    dubboInterface: interfaceName,
+    version: interfaceVersion,
+    methods: {
+      sayHello(name) {
+        console.log('run hello in service', name);
+        return [ java.String(name) ];
       },
     },
-  },
-};
-const Dubbo = new nzd(opt);
+  });
 
+const service = { dubboService };
+// 实例化Dubbo， 入参主要是名称和 dubbo 接口的设置
+const dubbo = new Dubbo({
+  application: { name: 'dubbo-node-consumer' },
+  register: 'localhost:2181',
+  dubboSetting,
+  service,
+});
+
+dubbo.ready().then(() => {
+  console.log('dubbo was ready');
+});
+
+dubbo.subscribe({
+  onTrace: msg => {
+    console.log(msg);
+  },
+});
+
+dubbo.use(async function costTime(ctx, next) {
+  console.log('before dubbo cost middleware', ctx);
+  const startTime = Date.now();
+  await next();
+  const endTime = Date.now();
+  console.log('end makecostTime->', endTime - startTime);
+});
+
+
+dubbo.use(
+  dubboInvoker(
+    matcher
+      .match(interfaceName, { version: '1.0.0' })
+  )
+);
 class TestDubboService extends Service {
 
   async sayHello(name) { // 暴露service 用于controller层调用
-    return Dubbo.AnnotationService.sayHello(name);
+    return await dubbo.service.dubboService.sayHello(name);
   }
 
 }
