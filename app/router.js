@@ -10,6 +10,7 @@ module.exports = app => {
   router.get('/index.htm', controller.home.home);
   router.get('/public/draw', controller.home.drawImage);
   router.all('/public/send-email', controller.email.sendEmail);
+  router.get('/public/run-dubbo', controller.dubbo.runDubbo);
   router.get('/test/testPage.html', controller.test.testPage.index);
 };
 /*end*/

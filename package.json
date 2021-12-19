@@ -7,16 +7,19 @@
     "declarations": true
   },
   "dependencies": {
+    "apache-dubbo-js": "^3.0.0-rc6",
+    "canvas": "^2.6.1",
+    "canvas-text-node": "^1.0.0",
+    "dubbo2.js": "^2.3.9",
     "egg": "^2.15.1",
     "egg-scripts": "^2.11.0",
     "egg-session": "^3.3.0",
     "egg-tracer": "^1.1.0",
-    "egg-view-nunjucks": "^2.2.0",
     "egg-user-interceptor": "^1.0.0",
+    "egg-view-nunjucks": "^2.2.0",
     "jar2proxy": "^1.0.7",
-    "nodemailer": "^6.4.11",
-    "canvas-text-node": "^1.0.0",
-    "canvas": "^2.6.1"
+    "node-zookeeper-dubbo": "^3.0.15",
+    "nodemailer": "^6.4.11"
   },
   "devDependencies": {
     "autod": "^3.0.1",
