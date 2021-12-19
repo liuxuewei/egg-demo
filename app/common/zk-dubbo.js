@@ -2,21 +2,21 @@
 'use strict';
 const nzd = require('node-zookeeper-dubbo');
 
-const interfaceName = 'com.dubbo.learn.dubbo.TestProviderService';
+const interfaceName = 'com.dll.dubbo.api.service.AnnotationService';
 const interfaceVersion = '1.0.0';
 
 const opt = {
-  application: { name: 'dubbo' },
+  application: { name: 'dubbo-consumer' },
   register: '127.0.0.1:2181',
-  dubboVer: '1.0.0',
+  dubboVer: '2.5.3',
   root: 'dubbo',
   dependencies: {
-    TestProviderService: {
+    AnnotationService: {
       interface: interfaceName,
       version: interfaceVersion,
       timeout: 6000, group: 'provider',
       methodSignature: { // optional
-        Hello: name => [{ $class: 'java.lang.String', $: name }],
+        sayHello: name => [{ $class: 'java.lang.String', $: name }],
       },
     },
   },

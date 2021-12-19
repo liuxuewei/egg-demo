@@ -3,8 +3,7 @@ const path = require('path');
 
 module.exports = {
   eggFramework: 'egg',
-  // directoryToJar: path.join(__dirname, '../libs'),
-  directoryToJar: '/Users/liuxuewei/work/demo/dubbo-demo/Java-dubbo-provider/target',
+  directoryToJar: path.join(__dirname, '../libs'),
   // mavenRepository: 'http://mvnonline.alibaba-inc.com/mvn/repository',
   group: 'HSF',
   version: '1.0.0',

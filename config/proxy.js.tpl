@@ -13,7 +13,7 @@ module.exports = function (app) {
     version = app.config.proxy.envVersion[appName] || version;
   }
   const serviceId = `{{ proxyProfile.canonicalName }}:${version}{%- if uniqueId %}:{{ uniqueId }}{%- endif %}`;
-  app.rpcClient = app.hsfClient || app.sofaRpcClient;
+  app.rpcClient = app.hsfClient || app.dubboRpcClient;
   if (!app.rpcClient) return;
   const consumer = app.rpcClient.createConsumer({
     id: serviceId,

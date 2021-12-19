@@ -1,16 +1,20 @@
 'use strict';
 const Controller = require('egg').Controller;
-// const ZKdubbo = require('../common/zk-dubbo');
+// const zkDubbo = require('../common/zk-dubbo');
 const dubbo = require('../common/dubbo');
 
 class DubboController extends Controller {
   // http://localhost:7001/public/run-dubbo?who=sss
   async runDubbo() {
     const { ctx } = this;
-    const { who } = ctx.request.query;
-    const result = await dubbo.service.dubboService.Hello(who);
-    // const result = await ZKdubbo.testProviderService.Hello({ $class: 'java.lang.String', $: who });
-    ctx.body = result;
+    const { who = 'guest' } = ctx.request.query;
+    const { res, err } = await dubbo.service.dubboService.sayHello(who);
+    // const result2 = await zkDubbo.AnnotationService.sayHello(who);
+    // const result3 = await this.ctx.service.testDubboService.sayHello(who);
+    ctx.body = {
+      res,
+      err,
+    };
   }
 }
 

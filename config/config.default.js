@@ -62,7 +62,6 @@ module.exports = appInfo => {
     },
     domainWhiteList: [ '.mayue.com' ], // ctx.redirect(url)、Access-Control-Allow-Origin
   };
-
   return {
     ...config,
   };

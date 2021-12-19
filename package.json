@@ -7,11 +7,14 @@
     "declarations": true
   },
   "dependencies": {
+    "@types/js-to-java": "^2.4.0",
     "apache-dubbo-js": "^3.0.0-rc6",
     "canvas": "^2.6.1",
     "canvas-text-node": "^1.0.0",
+    "dubbo-invoker": "^1.0.2",
     "dubbo2.js": "^2.3.9",
     "egg": "^2.15.1",
+    "egg-dubbo-rpc": "^1.2.1",
     "egg-scripts": "^2.11.0",
     "egg-session": "^3.3.0",
     "egg-tracer": "^1.1.0",
