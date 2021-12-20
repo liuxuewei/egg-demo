@@ -1,7 +1,6 @@
 'use strict';
 const Controller = require('egg').Controller;
-
-
+// chrome-devtools://devtools/bundled/inspector.html?experiments=true&v8only=true&ws=127.0.0.1:9231/53bdffdd-ab48-44d8-990e-4d4f4b0064fc
 class HomeController extends Controller {
   // http://localhost:7001/
   async index() {

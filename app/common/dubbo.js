@@ -22,6 +22,7 @@ const dubboService = dubbo =>
     },
   });
 
+
 const service = { dubboService };
 // 实例化Dubbo， 入参主要是名称和 dubbo 接口的设置
 const dubbo = new Dubbo({
