@@ -4,7 +4,7 @@ const nzd = require('node-zookeeper-dubbo-plus');
 
 const opt = {
   application: { name: 'dubbo-node-consumer' },
-  register: '127.0.0.1:2181',
+  registry: '127.0.0.1:2181',
   dubboVer: '2.6.5', // 2.6.x 以上版本，需要node-zookeeper-dubbo-plus才支持，但没有处理attachments
   root: 'dubbo',
   dependencies: {

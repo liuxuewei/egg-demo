@@ -15,4 +15,8 @@ module.exports = {
     package: 'egg-user-interceptor',
   },
   session: true,
+  mysql: {
+    enable: true,
+    package: 'egg-mysql',
+  },
 };

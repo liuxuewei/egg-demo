@@ -7,20 +7,21 @@
     "declarations": true
   },
   "dependencies": {
+    "@types/js-to-java": "^2.4.0",
+    "apache-dubbo-js": "^3.0.0-rc6",
     "canvas": "^2.6.1",
     "canvas-text-node": "^1.0.0",
-    "apache-dubbo-js": "^3.0.0-rc6",
     "dubbo-invoker": "^1.0.2",
-    "@types/js-to-java": "^2.4.0",
-    "node-zookeeper-dubbo-plus": "^3.0.16",
     "easy-monitor": "^2.2.8",
     "egg": "^2.15.1",
+    "egg-mysql": "^3.0.0",
     "egg-scripts": "^2.11.0",
     "egg-session": "^3.3.0",
     "egg-tracer": "^1.1.0",
     "egg-user-interceptor": "^1.0.0",
     "egg-view-nunjucks": "^2.2.0",
     "jar2proxy": "^1.0.7",
+    "node-zookeeper-dubbo-plus": "^3.0.16",
     "nodemailer": "^6.4.11"
   },
   "devDependencies": {
