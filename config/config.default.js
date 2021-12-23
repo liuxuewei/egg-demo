@@ -40,7 +40,13 @@ module.exports = appInfo => {
   };
 
   config.view = {
+    defaultExtension: 'html',
     defaultViewEngine: 'nunjucks',
+    mapping: {
+      '.nj': 'nunjucks',
+      '.vm': 'velocity',
+      '.ejs': 'ejs',
+    },
     // root: [
     //   path.join(appInfo.baseDir, 'app/view'),
     // ].join(',')

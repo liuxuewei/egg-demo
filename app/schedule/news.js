@@ -6,12 +6,12 @@ class News extends Subscription {
   static get schedule() {
     // 配置文档 https://github.com/eggjs/egg-schedule
     return {
-      interval: '2h', // 间隔30分钟 单位，s、m、h、
+      interval: '30m', // 间隔30秒 单位，s、m、h、
       // 定时任务cron表达式：
       // 秒(0 - 59)，分(0 - 59)，时(0 - 23)，日(1 - 31)，月(1 - 12)，星期(0 - 7) (0 or 7 is Sun)
       // eg: 每三小时准点执行一次
-      //cron: '0 0 */3 * * *',
-      type: 'worker', // 指定一个 worker 都需要执行
+      // cron: '0 0 */3 * * *', // 推荐corntab生成器 https://tool.lu/crontab
+      type: 'worker', // 指定一个 worker 执行即可，所有worker都需要执行则填写'all'
     };
   }
 

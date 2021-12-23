@@ -37,7 +37,7 @@
     "node": ">=10.0.0"
   },
   "scripts": {
-    "start": "egg-scripts start --port=7001 --daemon --title=egg-server-demo --ignore-stderr",
+    "start": "egg-scripts start --port=7001 --daemon --title=egg-server-demo --ignore-stderr --env=prod --workers=2",
     "stop": "egg-scripts stop --title=egg-server-demo",
     "dev": "egg-bin dev",
     "proxy": "jar2proxy",
