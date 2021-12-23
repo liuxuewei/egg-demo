@@ -22,4 +22,13 @@ module.exports = [
           // 输出编码：hex、binary、base64
           return hash.digest('hex')`,
   },
+  {
+    id: 5,
+    router: '/dubbo/test',
+    code: `
+          const { who = 'guest' } = this.request.query;
+          const dubbo2ServiceResult = await this.service.testDubboService.sayHello(who);
+          return dubbo2ServiceResult;
+        `,
+  },
 ];

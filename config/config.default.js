@@ -21,7 +21,7 @@ module.exports = appInfo => {
   config.middleware = [
     'trace',
     'permission',
-    // 'router',
+    'router',
   ];
 
   config.permission = {

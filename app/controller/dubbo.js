@@ -3,6 +3,7 @@ const Controller = require('egg').Controller;
 const zkDubbo = require('../common/zk-dubbo');
 const dubbo = require('../common/dubbo');
 
+// dubbo manager http://localhost:9090/home
 class DubboController extends Controller {
   // http://localhost:7001/public/run-dubbo?who=sss
   async runDubbo() {
