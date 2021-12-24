@@ -9,8 +9,8 @@ const transporter = nodemailer.createTransport({
   secure: true,
   // 我们需要登录到网页邮箱中，然后配置SMTP和POP3服务器的密码
   auth: {
-    user: '1000@qq.com',
-    pass: 'xxx',
+    user: '1006724845@qq.com',
+    pass: 'kbbizvglzatnbegg',
   },
 });
 
@@ -20,9 +20,9 @@ class EmailController extends Controller {
   async sendEmail() {
     const { ctx } = this;
     // 获取发送邮件列表
-    const mails = ['ceshi@alibaba-inc.com', 'test@alibaba-inc.com'];
+    const mails = [ '441929786@qq.com' ];
     const message = {
-      from: '1000@qq.com',
+      from: '1006724845@qq.com',
       to: mails.join(','),
       img: 'https://img.alicdn.com/tfs/TB1bbLH2eL2gK0jSZPhXXahvXXa-2460-1020.png',
       title: '第三届前端艺术家沙龙于10月24日成功举办',
