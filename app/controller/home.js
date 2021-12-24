@@ -84,8 +84,8 @@ class HomeController extends Controller {
   async drawImage() {
     const pannel = { width: 500, height: 889.25 };
     const processorList = [
-      { type: 'IMAGE', url: '{{ avatar }}', width: 202, height: 202, x: 145, y: 262 },
       { type: 'IMAGE', url: '{{ bgImage }}', ...pannel, x: 0, y: 0 },
+      { type: 'IMAGE', url: '{{ avatar }}', width: 202, height: 202, x: 145, y: 262 },
       {
         type: 'TEXT',
         text: '{{ employeeName }}',
