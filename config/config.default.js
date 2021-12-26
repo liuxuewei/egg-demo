@@ -68,6 +68,18 @@ module.exports = appInfo => {
     },
     domainWhiteList: [ '.mayue.com' ], // ctx.redirect(url)、Access-Control-Allow-Origin
   };
+  config.dubbo = {
+    enable: true,
+    registry: {
+      address: '127.0.0.1:2181', // 注册中心地址
+    },
+    client: {
+      group: 'DUBBO', // 设置默认 group
+    },
+    // server: {
+    //   port: 7002
+    // }
+  }
   return {
     ...config,
   };

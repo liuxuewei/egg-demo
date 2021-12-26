@@ -2,7 +2,7 @@
 
 module.exports = [
   {
-    id: 2,
+    id: 1,
     router: '/public/test',
     code: 'return $browserParams;',
   },
@@ -18,7 +18,7 @@ module.exports = [
           // 创建哈希函数 sha256
           const hash = crypto.createHash('sha256');
           // 输入流编码：utf8、ascii、binary（默认）
-          hash.update('some data to hash', 'utf8');
+          hash.update('mayue', 'utf8');
           // 输出编码：hex、binary、base64
           return hash.digest('hex')`,
   },

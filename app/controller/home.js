@@ -34,6 +34,15 @@ class HomeController extends Controller {
     ctx.body = result;
   }
 
+  async proxyInvoke() {
+    const { ctx } = this;
+    const userId = ctx.userId;
+    const askId = ctx.query.askId;
+    console.log(this.app.config.proxy);
+    const result = await ctx.proxy.iMonetouchCommunityRemoteService.getAskDetail(userId, askId);
+    ctx.body = result;
+  }
+
   async index() {
     const { ctx } = this;
     ctx.session.visited = ctx.session.visited ? (ctx.session.visited + 1) : 1;
@@ -43,6 +52,11 @@ class HomeController extends Controller {
     // const result = await ctx.proxy.iMonetouchCommunityRemoteService.getMotRolesByAliId(123456);
     ctx.set('content-type', 'text/html');
     ctx.body = `<p style="color:red;">hi, ${userId || 'guest'}, traceId: ${ctx.traceId}，visited：${visited}</p><script>console.log("xss success");</script>`;
+    ctx.body = {
+      code: 200,
+      data: {},
+      success: true
+    }
   }
   // http://localhost:7001/say-hello.json?name=马跃
   // http://localhost:7001/say-hello.json?name=刘学炜
@@ -53,7 +67,6 @@ class HomeController extends Controller {
     const mysql = ctx.app.mysql;
     let login = false;
     if (params.id) {
-      ctx.session.name = 'fhskjldfhsdkfjslkfslkfslkskldfjsskfjfhskjldfhsdkfjslkfslkfslkskldfjsskfjfhskjldfhsdkfjslkfslkfslkskldfjsskfjfhskjldfhsdkfjslkfslkfslkskldfjsskfjfhskjldfhsdkfjslkfslkfslkskldfjsskfjfhskjldfhsdkfjslkfslkfslkskldfjsskfj';
       ctx.session.userId = params.id;
       ctx.session.visited = 1;
       login = true;

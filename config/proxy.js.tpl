@@ -13,7 +13,7 @@ module.exports = function (app) {
     version = app.config.proxy.envVersion[appName] || version;
   }
   const serviceId = `{{ proxyProfile.canonicalName }}:${version}{%- if uniqueId %}:{{ uniqueId }}{%- endif %}`;
-  app.rpcClient = app.hsfClient || app.dubboRpcClient;
+  app.rpcClient = app.dubbo2Client || app.dubboClient;
   if (!app.rpcClient) return;
   const consumer = app.rpcClient.createConsumer({
     id: serviceId,
@@ -32,6 +32,10 @@ module.exports = function (app) {
     errorAsNull: {{errorAsNull}},
     {%- endif %}
   });
+
+  if (!consumer) {
+    return;
+  }
 
   {{ proxyProfile.commentText | comment(2) }}
   class {{ proxyProfile.canonicalName | splitLast('.') | upperFirst }} extends app.Proxy {

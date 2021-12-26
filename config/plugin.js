@@ -15,6 +15,10 @@ module.exports = {
     package: 'egg-user-interceptor',
   },
   session: true,
+  dubbo: {
+    enable: true,
+    package: 'egg-dubbo-rpc-client',
+  },
   mysql: {
     enable: true,
     package: 'egg-mysql',
