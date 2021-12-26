@@ -1,8 +1,39 @@
 'use strict';
 const Controller = require('egg').Controller;
 // chrome-devtools://devtools/bundled/inspector.html?experiments=true&v8only=true&ws=127.0.0.1:9231/53bdffdd-ab48-44d8-990e-4d4f4b0064fc
+
+const promiseCall = function (name) {
+  const callback = function (reslove, reject) {
+    if (name === '马跃') {
+      const timeoutFunc = function () {
+        reslove({
+          code: 200,
+          data: 'mayue',
+          success: true
+        })
+      };
+      setTimeout(timeoutFunc, 3000);
+    } else {
+      reject(JSON.stringify({
+        code: 500,
+        data: null,
+        success: false
+      }))
+    }
+  }
+  return new Promise(callback);
+}
+
 class HomeController extends Controller {
   // http://localhost:7001/
+
+  async promise() {
+    const { ctx } = this;
+    const { name = 'mayue' } = ctx.request.query;
+    const result = await promiseCall(name);
+    ctx.body = result;
+  }
+
   async index() {
     const { ctx } = this;
     ctx.session.visited = ctx.session.visited ? (ctx.session.visited + 1) : 1;
@@ -22,6 +53,7 @@ class HomeController extends Controller {
     const mysql = ctx.app.mysql;
     let login = false;
     if (params.id) {
+      ctx.session.name = 'fhskjldfhsdkfjslkfslkfslkskldfjsskfjfhskjldfhsdkfjslkfslkfslkskldfjsskfjfhskjldfhsdkfjslkfslkfslkskldfjsskfjfhskjldfhsdkfjslkfslkfslkskldfjsskfjfhskjldfhsdkfjslkfslkfslkskldfjsskfjfhskjldfhsdkfjslkfslkfslkskldfjsskfj';
       ctx.session.userId = params.id;
       ctx.session.visited = 1;
       login = true;
@@ -35,7 +67,7 @@ class HomeController extends Controller {
       const options = {
         where: {
           name: '马跃',
-          id: [ 2, 4 ],
+          id: [2, 4],
         },
       };
       const insert = await mysql.insert('user_visit', insertRow); // 插入 user_visit
@@ -49,9 +81,9 @@ class HomeController extends Controller {
     // 自定义查询条件
     const select = await this.app.mysql.select('user_visit', {
       // WHERE 条件，只会转成“IN”或“IS”或“=”，如果想使用like等特殊查询条件，请使用query查询方法
-      where: { name: [ '马跃', 'mayue' ] },
-      columns: [ 'login_time' ], // 要查询的表字段
-      orders: [[ 'login_time', 'desc' ], [ 'id', 'desc' ]], // 排序方式
+      where: { name: ['马跃', 'mayue'] },
+      columns: ['login_time'], // 要查询的表字段
+      orders: [['login_time', 'desc'], ['id', 'desc']], // 排序方式
       limit: 10, // 返回数据量
       offset: 0, // 数据偏移量
     });
