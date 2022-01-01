@@ -25,7 +25,7 @@ module.exports = appInfo => {
   ];
 
   config.permission = {
-    blackList: ['刘学炜', '小明'],
+    blackList: [ '刘学炜', '小明' ],
   };
 
   config.userInterceptor = {
@@ -79,7 +79,7 @@ module.exports = appInfo => {
     // server: {
     //   port: 7002
     // }
-  }
+  };
   return {
     ...config,
   };

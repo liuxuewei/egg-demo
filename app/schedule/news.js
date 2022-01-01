@@ -31,19 +31,19 @@ class News extends Subscription {
       {
         title: '图片加载失败后CSS样式处理最佳实践',
         messageURL: 'https://www.zhangxinxu.com/wordpress/2020/10/css-style-image-load-fail/',
-        picURL: 'https://image.zhangxinxu.com/image/blog/202010/2020-10-24_193506.png'
+        picURL: 'https://image.zhangxinxu.com/image/blog/202010/2020-10-24_193506.png',
       },
       {
         title: '我的前端成长之路',
         messageURL: 'https://juejin.im/post/6889239308201361416',
-        picURL: 'https://img.alicdn.com/tfs/TB1BKb0qBFR4u4jSZFPXXanzFXa-1492-938.png'
-      }
+        picURL: 'https://img.alicdn.com/tfs/TB1BKb0qBFR4u4jSZFPXXanzFXa-1492-938.png',
+      },
     ];
     // 钉钉自定义机器人文档 https://ding-doc.dingtalk.com/doc#/serverapi2/qf2nxq/26eaddd5
     const res = await ctx.curl('https://oapi.dingtalk.com/robot/send?access_token=4e99a08b02a26a4995c2284d9e7094b51c2e925a4e207997478111491589559b', {
       method: 'POST',
       headers: {
-        'content-type': 'application/json'
+        'content-type': 'application/json',
       },
       data:
             {
@@ -52,18 +52,18 @@ class News extends Subscription {
                 links: messages,
               },
             },
-            // {
-            //     "msgtype": "actionCard",
-            //     "actionCard": {
-            //         "title": `【前端头条】${headNews[0].title}`,
-            //         "text": `![screenshot](${headNews[0].picURL})
-            //         \n # ${headNews[0].title}
-            //         \n ${headNews[0].text}`,
-            //         "btnOrientation": "0",
-            //         "singleTitle": "阅读全文",
-            //         "singleURL": `dingtalk://dingtalkclient/page/link?url=${headNews[0].messageURL}&pc_slide=false`
-            //     }
-            // }
+      // {
+      //     "msgtype": "actionCard",
+      //     "actionCard": {
+      //         "title": `【前端头条】${headNews[0].title}`,
+      //         "text": `![screenshot](${headNews[0].picURL})
+      //         \n # ${headNews[0].title}
+      //         \n ${headNews[0].text}`,
+      //         "btnOrientation": "0",
+      //         "singleTitle": "阅读全文",
+      //         "singleURL": `dingtalk://dingtalkclient/page/link?url=${headNews[0].messageURL}&pc_slide=false`
+      //     }
+      // }
     });
     ctx.logger.info('send news status', res.status);
   }

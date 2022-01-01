@@ -41,7 +41,7 @@ module.exports = options => {
           timeout: 500,
           require: {
             external: true,
-            builtin: ['*'],
+            builtin: [ '*' ],
           },
           wrapper: 'none',
         });

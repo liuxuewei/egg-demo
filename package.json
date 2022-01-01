@@ -43,7 +43,7 @@
     "dev": "egg-bin dev",
     "proxy": "jar2proxy",
     "debug": "egg-bin debug",
-    "test": "npm run lint -- --fix && npm run test-local",
+    "test": "egg-bin test",
     "test-local": "egg-bin test",
     "cov": "egg-bin cov",
     "lint": "eslint .",

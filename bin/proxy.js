@@ -11,18 +11,18 @@ class AliProxyCommand extends Command {
 
   * run({ cwd, rawArgv, execArgv, env }) {
     const jar2proxy = new Jar2proxy({
-        base: baseDir,
-        debugEnabled: false,
-        defaultTpl: path.resolve(path.join(__dirname, useGeneric ? './tpl/generic.tpl' : './tpl/hessian.tpl')),
-        analyzeEgg: false,
-        maxJavaHeapSize: 2048,
-        customMavenServer: {
-            protocol: 'http:',
-            hostname: 'mvnonline.alibaba-inc.com',
-            ip: '100.67.77.215',
-            port: 80,
-            pathname: '/mvn/repository',
-        },
+      base: baseDir,
+      debugEnabled: false,
+      defaultTpl: path.resolve(path.join(__dirname, useGeneric ? './tpl/generic.tpl' : './tpl/hessian.tpl')),
+      analyzeEgg: false,
+      maxJavaHeapSize: 2048,
+      customMavenServer: {
+        protocol: 'http:',
+        hostname: 'mvnonline.alibaba-inc.com',
+        ip: '100.67.77.215',
+        port: 80,
+        pathname: '/mvn/repository',
+      },
     });
     yield jar2proxy.run();
   }
