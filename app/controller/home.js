@@ -50,8 +50,8 @@ class HomeController extends Controller {
     const userId = ctx.session.userId;
     ctx.logger.info('userId:%s', userId);
     // const result = await ctx.proxy.iMonetouchCommunityRemoteService.getMotRolesByAliId(123456);
-    ctx.set('content-type', 'text/html');
-    ctx.body = `<p style="color:red;">hi, ${userId || 'guest'}, traceId: ${ctx.traceId}，visited：${visited}</p>`;
+    ctx.set('content-type', 'text/html;charset=utf-8');
+    ctx.body = `<p style="color:red;">hi, ${userId || 'guest'}, traceId: ${ctx.traceId}，visited:${visited}</p>`;
     // ctx.body = {
     //   code: 200,
     //   data: {},
