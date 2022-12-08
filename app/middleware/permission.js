@@ -13,6 +13,7 @@ module.exports = options => {
         message: '没有权限',
       };
       ctx.status = 403;
+      return;
     }
     await next();
   };

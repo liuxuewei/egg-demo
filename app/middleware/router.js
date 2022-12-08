@@ -11,7 +11,7 @@ const matchLocalRouter = ctx => {
     const matchResult = ctx.app.router.match(ctx.path, ctx.method);
     // 如果本地匹配到合适的路由
     if (matchResult && matchResult.pathAndMethod.length) {
-      ctx.logger.info('local router match success: ', matchResult);
+      ctx.logger.info('local router match success: ', matchResult.pathAndMethod);
       return matchResult;
     }
     return false;

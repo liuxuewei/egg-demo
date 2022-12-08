@@ -5,9 +5,9 @@
  */
 module.exports = app => {
   const { router, controller } = app;
-  router.get('/', controller.home.index);
+  router.get('/', controller.home.home);
   router.get('/login', controller.home.login);
-  router.get('/index.htm', controller.home.home);
+  router.get('/index.htm', controller.home.index);
   router.get('/proxy.json', controller.home.proxyInvoke);
   router.get('/promise.json', controller.home.promise);
   router.get('/public/draw', controller.home.drawImage);

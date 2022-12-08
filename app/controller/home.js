@@ -66,41 +66,42 @@ class HomeController extends Controller {
     // 设置session
     const mysql = ctx.app.mysql;
     let login = false;
-    if (params.id) {
-      ctx.session.userId = params.id;
+    if (params.name) {
+      ctx.session.userId = params.name;
       ctx.session.visited = 1;
       login = true;
-      const insertRow = {
-        name: params.id,
-        login_time: mysql.literals.now, // `now()` on db server
-      };
-      const updateRow = {
-        login_time: mysql.literals.now, // `now()` on db server
-      };
-      const options = {
-        where: {
-          name: '马跃',
-          id: [ 2, 4 ],
-        },
-      };
-      const insert = await mysql.insert('user_visit', insertRow); // 插入 user_visit
-      ctx.logger.info('insert:%j', insert);
-      const update = await mysql.update('user_visit', updateRow, options); // 更新 user_visit 表中的记录
-      ctx.logger.info('update:%j', update);
+      //更新数据库登录状态
+      // const insertRow = {
+      //   name: params.name,
+      //   login_time: mysql.literals.now, // `now()` on db server
+      // };
+      // const updateRow = {
+      //   login_time: mysql.literals.now, // `now()` on db server
+      // };
+      // const options = {
+      //   where: {
+      //     name: '马跃',
+      //     id: [ 2, 4 ],
+      //   },
+      // };
+      // const insert = await mysql.insert('user_visit', insertRow); // 插入 user_visit
+      // ctx.logger.info('insert:%j', insert);
+      // const update = await mysql.update('user_visit', updateRow, options); // 更新 user_visit 表中的记录
+      // ctx.logger.info('update:%j', update);
     }
     // 查询一条
-    const get = await this.app.mysql.get('user_visit', { name: 'mayue' });
-    ctx.logger.info('get:%j', get);
-    // 自定义查询条件
-    const select = await this.app.mysql.select('user_visit', {
-      // WHERE 条件，只会转成“IN”或“IS”或“=”，如果想使用like等特殊查询条件，请使用query查询方法
-      where: { name: [ '马跃', 'mayue' ] },
-      columns: [ 'login_time' ], // 要查询的表字段
-      orders: [[ 'login_time', 'desc' ], [ 'id', 'desc' ]], // 排序方式
-      limit: 10, // 返回数据量
-      offset: 0, // 数据偏移量
-    });
-    ctx.logger.info('visit:%j', select);
+    // const get = await this.app.mysql.get('user_visit', { name: 'mayue' });
+    // ctx.logger.info('get:%j', get);
+    // // 自定义查询条件
+    // const select = await this.app.mysql.select('user_visit', {
+    //   // WHERE 条件，只会转成“IN”或“IS”或“=”，如果想使用like等特殊查询条件，请使用query查询方法
+    //   where: { name: [ '马跃', 'mayue' ] },
+    //   columns: [ 'login_time' ], // 要查询的表字段
+    //   orders: [[ 'login_time', 'desc' ], [ 'id', 'desc' ]], // 排序方式
+    //   limit: 10, // 返回数据量
+    //   offset: 0, // 数据偏移量
+    // });
+    // ctx.logger.info('visit:%j', select);
     // 自定义sql，不能使用？占位符的请使用 mysql.escape() 包一层，使用场景包括where 大于小于、like等等
     // await this.app.mysql.query('update posts set name = ? where id = ?', ["马跃", 1]);
 
@@ -108,7 +109,7 @@ class HomeController extends Controller {
     ctx.body = {
       success: login,
       message: login ? '登录成功' : '登录失败',
-      data: `hi, ${params.id || 'guest'}`,
+      data: `hi, ${params.name || 'guest'}`,
     };
 
   }
