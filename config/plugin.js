@@ -16,11 +16,11 @@ module.exports = {
   },
   session: true,
   dubbo: {
-    enable: true,
+    enable: false,
     package: 'egg-dubbo-rpc-client',
   },
   mysql: {
-    enable: true,
+    enable: false,
     package: 'egg-mysql',
   },
 };

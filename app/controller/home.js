@@ -51,12 +51,12 @@ class HomeController extends Controller {
     ctx.logger.info('userId:%s', userId);
     // const result = await ctx.proxy.iMonetouchCommunityRemoteService.getMotRolesByAliId(123456);
     ctx.set('content-type', 'text/html');
-    ctx.body = `<p style="color:red;">hi, ${userId || 'guest'}, traceId: ${ctx.traceId}，visited：${visited}</p><script>console.log("xss success");</script>`;
-    ctx.body = {
-      code: 200,
-      data: {},
-      success: true,
-    };
+    ctx.body = `<p style="color:red;">hi, ${userId || 'guest'}, traceId: ${ctx.traceId}，visited：${visited}</p>`;
+    // ctx.body = {
+    //   code: 200,
+    //   data: {},
+    //   success: true,
+    // };
   }
   // http://localhost:7001/say-hello.json?name=马跃
   // http://localhost:7001/say-hello.json?name=刘学炜

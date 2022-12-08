@@ -1,5 +1,4 @@
 'use strict';
-
 const { Dubbo, java, setting } = require('apache-dubbo-js');
 // const { Dubbo, java, setting } = require('dubbo2.js');
 const { dubboInvoker, matcher } = require('dubbo-invoker');

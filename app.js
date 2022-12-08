@@ -48,7 +48,7 @@ class AppBootHook {
     // const ctx = await this.app.createAnonymousContext();
     // await ctx.service.Biz.request();
     // easy-monitor 2.x http://127.0.0.1:12333
-    easyMonitor('egg-demo');
+    // easyMonitor('egg-demo');
   }
 
   async serverDidReady() {
