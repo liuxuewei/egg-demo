@@ -1,11 +1,12 @@
 'use strict';
 // const easyMonitor = require('easy-monitor');
-const TcpServer = require('./app/tcp/server');
+const TcpServer = require('./app/tcp/tcpServer');
 
 class AppBootHook {
   constructor(app) {
     this.app = app;
     this.tcpServer = null;
+    this.tcpBroadcastServer = null;
   }
 
   configWillLoad() {
@@ -49,6 +50,9 @@ class AppBootHook {
     if (!this.tcpServer) {
       this.tcpServer = new TcpServer();
     }
+    // if (!this.tcpBroadcastServer) {
+    //   this.tcpBroadcastServer = new TcpServer('broadcast');
+    // }
 
 
     // const ctx = await this.app.createAnonymousContext();
@@ -68,9 +72,8 @@ class AppBootHook {
 
   beforeClose() {
     // 应用服务关闭时，停用TCP服务
-    if (this.tcpServer) {
-      this.tcpServer.finishServer();
-    }
+    this.tcpServer && this.tcpServer.finishServer();
+    this.tcpBroadcastServer && this.tcpBroadcastServer.finishServer();
   }
 }
 

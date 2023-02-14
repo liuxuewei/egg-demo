@@ -11,7 +11,7 @@ const matchLocalRouter = ctx => {
     const matchResult = ctx.app.router.match(ctx.path, ctx.method);
     // 如果本地匹配到合适的路由
     if (matchResult && matchResult.pathAndMethod.length) {
-      ctx.logger.info('local router match success: ', matchResult.pathAndMethod);
+      ctx.logger.debug('local router match success: ', matchResult.pathAndMethod);
       return matchResult;
     }
     return false;
@@ -23,7 +23,7 @@ const matchLocalRouter = ctx => {
 module.exports = options => {
   return async function router(ctx, next) {
     const isMatchLocalRouter = matchLocalRouter(ctx);
-    ctx.logger.info('isMatchLocalRouterResult:%j', isMatchLocalRouter);
+    ctx.logger.debug('isMatchLocalRouterResult:%j', isMatchLocalRouter);
     if (isMatchLocalRouter) {
       return await next();
     }
@@ -33,7 +33,7 @@ module.exports = options => {
       $browserParams: { ...browserParams },
     };
     const matchDBRouter = db.find(({ router }) => router === ctx.path);
-    ctx.logger.info('isMatchDBRouter:%j', matchDBRouter);
+    ctx.logger.debug('isMatchDBRouter:%j', matchDBRouter);
     if (matchDBRouter) {
       try {
         const vm = new NodeVM({
@@ -52,7 +52,7 @@ module.exports = options => {
         };
         return;
       } catch (error) {
-        ctx.logger.info('dynamicRunRouter error', error);
+        ctx.logger.debug('dynamicRunRouter error', error);
         ctx.body = {
           code: 500,
           message: error.message,

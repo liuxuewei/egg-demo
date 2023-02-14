@@ -7,8 +7,8 @@ class HomeController extends Controller {
   // http://localhost:7001/index.htm?name=刘学炜
   async index() {
     const { ctx } = this;
-    const params = ctx.query;
-    const result = await this.service.tcp.requestServer(params);
+    const params = { type: 'getMachineTemperature', ...ctx.query };
+    const result = await this.service.tcpClient.requestServer(params);
     ctx.body = result;
   }
 }

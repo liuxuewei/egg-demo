@@ -5,7 +5,7 @@ module.exports = options => {
   return async function permission(ctx, next) {
     const params = ctx.query;
     const blackList = options.blackList || [];
-    ctx.logger.info('blackList', blackList);
+    ctx.logger.debug('blackList', blackList);
     if (blackList.indexOf(params.name) > -1) {
       ctx.body = {
         code: 403,
