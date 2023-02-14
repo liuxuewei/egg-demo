@@ -55,7 +55,6 @@ class TcpClient extends Service {
       tcp_receive_broadcast_client.on('data', data => {
         const dataString = data.toString(encoding);
         try {
-          console.log('parse' + dataString);
           const dataJson = JSON.parse(dataString);
           console.log('接收到广播: %j', dataJson);
         } catch (e) {
@@ -78,7 +77,6 @@ class TcpClient extends Service {
       tcp_request_client.once('data', data => {
         const dataString = data.toString(encoding);
         try {
-          console.log('parse' + dataString);
           const dataJson = JSON.parse(dataString);
           if (dataJson.traceId === params.traceId) {
             console.log('接收到数据: %j', dataJson);

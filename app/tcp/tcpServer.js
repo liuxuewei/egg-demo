@@ -26,7 +26,7 @@ class TcpServer {
     this.server.on('connection', clientSocket => {
       const clientKey = clientSocket.remoteAddress + ':' + clientSocket.remotePort;
       this.ClientSockets[clientKey] = clientSocket;
-      console.log(clientKey + '连接服务器' + this.serverId);
+      console.log(clientKey + '连接服务器' + this.serverType + ':' + this.serverId);
 
       this.refreshClients();
       
@@ -34,7 +34,7 @@ class TcpServer {
         setInterval(() => {
           // 广播连接状态
           this.broadcast(clientKey + ', 连接广播服务器状态正常!');
-        }, 100);
+        }, 5000);
       } else {
         // 处理客户端消息
         clientSocket.on('data', data => {
@@ -60,7 +60,7 @@ class TcpServer {
         clientSocket.destroy();
         this.ClientSockets[clientKey] = null;
         delete this.ClientSockets[clientKey];
-        console.log('客户端 %s 断开连接!', clientKey);
+        console.log('客户端 %s 断开连接 %s %s', clientKey, this.serverType, this.serverId);
         this.refreshClients();
       });
       // 客户端正异断开时执行
@@ -68,18 +68,18 @@ class TcpServer {
         clientSocket.destroy();
         this.ClientSockets[clientKey] = null;
         delete this.ClientSockets[clientKey];
-        console.log('客户端 %s 发生错误并断开连接: %s', clientKey, err.message);
+        console.log('客户端 %s 发生错误,并断开连接%s %s, error:', clientKey, this.serverType, this.serverId, err.message);
         this.refreshClients();
       });
     });
 
     this.server.on('error', e => {
-      console.log(this.serverId + ' TCP服务端异常!', e);
+      console.log(this.serverType + ':' + this.serverId + ' TCP服务端异常!', e);
       this.closeClientSockets();
     });
 
     this.server.on('close', () => {
-      console.log(this.serverId + ' TCP服务端关闭!');
+      console.log(this.serverType + ':' + this.serverId + ' TCP服务端关闭!');
       this.closeClientSockets();
     });
   }
@@ -87,7 +87,6 @@ class TcpServer {
   // 向所有客户端广播消息
   broadcast(msg) {
     for (const key in this.ClientSockets) {
-      console.log('broadcast', key);
       const dataJson = { type: 'broadcast', data: msg };
       const dataString = JSON.stringify({ dataJson });
       if (this.ClientSockets[key]) {
@@ -115,7 +114,7 @@ class TcpServer {
   // 刷新服务器并发数据
   refreshClients() {
     this.server.getConnections((error, count) => {
-      console.log(this.serverId + ' 当前连接TCP服务器，客户端个数为：' + count);
+      console.log(this.serverType + ':' + this.serverId + ' 当前连接客户端个数为：' + count);
     });
   }
 }
