@@ -13,5 +13,6 @@ module.exports = app => {
   router.get('/public/draw', controller.home.drawImage);
   router.all('/public/send-email', controller.email.sendEmail);
   router.get('/public/run-dubbo', controller.dubbo.runDubbo);
+  router.get('/public/tcp', controller.tcp.index);
 };/* end*/
 

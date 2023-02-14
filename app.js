@@ -1,9 +1,11 @@
 'use strict';
-const easyMonitor = require('easy-monitor');
+// const easyMonitor = require('easy-monitor');
+const TcpServer = require('./app/tcp/server');
 
 class AppBootHook {
   constructor(app) {
     this.app = app;
+    this.tcpServer = null;
   }
 
   configWillLoad() {
@@ -44,6 +46,10 @@ class AppBootHook {
 
   async didReady() {
     // 应用已经启动完毕
+    if (!this.tcpServer) {
+      this.tcpServer = new TcpServer();
+    }
+
 
     // const ctx = await this.app.createAnonymousContext();
     // await ctx.service.Biz.request();
@@ -55,9 +61,16 @@ class AppBootHook {
     // http / https server 已启动，开始接受外部请求
     // 此时可以从 app.server 拿到 server 的实例
 
-    this.app.server.on('timeout', socket => {
-      // handle socket timeout
-    });
+    // this.app.server.on('timeout', socket => {
+    // handle socket timeout
+    // });
+  }
+
+  beforeClose() {
+    // 应用服务关闭时，停用TCP服务
+    if (this.tcpServer) {
+      this.tcpServer.finishServer();
+    }
   }
 }
 
