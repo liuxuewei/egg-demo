@@ -56,7 +56,7 @@ class TcpClient extends Service {
         const dataString = data.toString(encoding);
         try {
           const dataJson = JSON.parse(dataString);
-          console.log('接收到广播: %j', dataJson);
+          console.log('接收到广播: %j', dataJson); 
         } catch (e) {
           console.log(e);
         }
@@ -64,10 +64,10 @@ class TcpClient extends Service {
     });
   }
   async requestServer(params) {
-    if (!tcp_request_client) {
+    if (!tcp_request_client || tcp_request_client.destroyed) {
       await this.startClient();
     }
-    if (!tcp_receive_broadcast_client) {
+    if (!tcp_receive_broadcast_client || tcp_receive_broadcast_client.destroyed) {
       await this.startReceiveBroadcastClient();
     }
     // 添加请求追踪ID
