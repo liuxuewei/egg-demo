@@ -68,9 +68,9 @@ class TcpClient extends Service {
     if (!tcp_request_client) {
       await this.startClient();
     }
-    // if (!tcp_receive_broadcast_client) {
-    //   await this.startReceiveBroadcastClient();
-    // }
+    if (!tcp_receive_broadcast_client) {
+      await this.startReceiveBroadcastClient();
+    }
     // 添加请求追踪ID
     params.traceId = this.ctx.traceId;
     return new Promise((resolve, reject) => {
