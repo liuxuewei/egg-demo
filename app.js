@@ -50,9 +50,9 @@ class AppBootHook {
     if (!this.tcpServer) {
       this.tcpServer = new TcpServer();
     }
-    // if (!this.tcpBroadcastServer) {
-    //   this.tcpBroadcastServer = new TcpServer('broadcast');
-    // }
+    if (!this.tcpBroadcastServer) {
+      this.tcpBroadcastServer = new TcpServer('broadcast');
+    }
 
 
     // const ctx = await this.app.createAnonymousContext();
