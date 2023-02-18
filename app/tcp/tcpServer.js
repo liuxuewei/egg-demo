@@ -1,15 +1,12 @@
 
 'use strict';
 const net = require('net');
-const crypto = require('crypto');
 
 const PORT = 6688;
 const encoding = 'utf8';
 
 class TcpServer {
-  constructor(type) {
-    this.serverType = type || 'normal'; // normal, broadcast
-    this.port = type === 'broadcast' ? PORT + 1 : PORT; // 广播的端口单独设置
+  constructor() {
     // 缓存客户端
     this.ClientSockets = {};
     this.createServer();
@@ -17,43 +14,26 @@ class TcpServer {
 
   createServer() {
     this.server = net.createServer();
-    this.serverId = crypto.randomUUID();
     // 监听 端口
-    this.server.listen(this.port, () => {
-      console.log(this.serverId + ' TCP服务' + this.serverType + '启动成功，监听端口：' + this.port);
+    this.server.listen(PORT, () => {
+      console.log( 'TCP服务启动成功，监听端口：' + PORT);
     });
 
     this.server.on('connection', clientSocket => {
-      const clientKey = clientSocket.remoteAddress + ':' + clientSocket.remotePort;
+      const clientKey = clientSocket.remoteAddress;
       this.ClientSockets[clientKey] = clientSocket;
-      console.log(clientKey + '连接服务器' + this.serverType + ':' + this.serverId);
+      console.log(clientKey + '连接服务器成功');
 
       this.refreshClients();
-      
-      if (this.serverType === 'broadcast') {
-        setInterval(() => {
-          // 广播连接状态
-          this.broadcast(clientKey + ', 连接广播服务器状态正常!');
-        }, 5 * 60 * 1000);
-      } else {
-        // 处理客户端消息
-        clientSocket.on('data', data => {
-          const dataString = data.toString(encoding);
-          console.log('客户端 %s 请求原始数据: %j', clientKey, dataString);
-          const dataJson = JSON.parse(dataString);
-          clientSocket.setEncoding(encoding);
-          console.log('客户端 %s 请求处理数据:%j', clientKey, dataJson);
-          const result = { clientKey, type: dataJson.type, traceId: dataJson.traceId };
-          if (dataJson.type === 'getMachineTemperature') {
-            const cpuTemperature = Number(Math.random() * 100).toFixed(2);
-            result.data = cpuTemperature;
-          } else {
-            result.data = '请求成功';
-          }
-          const resultString = JSON.stringify(result);
-          clientSocket.write(resultString);
-        });
-      }
+
+      // 处理客户端消息
+      clientSocket.on('data', data => {
+        const dataString = data.toString(encoding);
+        console.log('客户端 %s 请求原始数据: %j', clientKey, dataString);
+        const dataJson = JSON.parse(dataString);
+        clientSocket.setEncoding(encoding);
+        console.log('客户端 %s 请求处理数据:%j', clientKey, dataJson);
+      });
 
 
       // 客户端正常断开时执行
@@ -61,7 +41,7 @@ class TcpServer {
         clientSocket.destroy();
         this.ClientSockets[clientKey] = null;
         delete this.ClientSockets[clientKey];
-        console.log('客户端 %s 断开连接 %s %s', clientKey, this.serverType, this.serverId);
+        console.log('客户端 %s 断开连接', clientKey);
         this.refreshClients();
       });
       // 客户端正异断开时执行
@@ -69,31 +49,20 @@ class TcpServer {
         clientSocket.destroy();
         this.ClientSockets[clientKey] = null;
         delete this.ClientSockets[clientKey];
-        console.log('客户端 %s 发生错误,并断开连接%s %s, error:', clientKey, this.serverType, this.serverId, err.message);
+        console.log('客户端 %s 发生错误,并断开连接, error: %', clientKey, err.message);
         this.refreshClients();
       });
     });
 
     this.server.on('error', e => {
-      console.log(this.serverType + ':' + this.serverId + ' TCP服务端异常!', e);
+      console.log('TCP服务端异常!', e);
       this.closeClientSockets();
     });
 
     this.server.on('close', () => {
-      console.log(this.serverType + ':' + this.serverId + ' TCP服务端关闭!');
+      console.log('TCP服务端关闭!');
       this.closeClientSockets();
     });
-  }
-
-  // 向所有客户端广播消息
-  broadcast(msg) {
-    for (const key in this.ClientSockets) {
-      const dataJson = { type: 'broadcast', data: msg };
-      const dataString = JSON.stringify({ dataJson });
-      if (this.ClientSockets[key]) {
-        this.ClientSockets[key].write(dataString);
-      }
-    }
   }
 
 
@@ -115,7 +84,7 @@ class TcpServer {
   // 刷新服务器并发数据
   refreshClients() {
     this.server.getConnections((error, count) => {
-      console.log(this.serverType + ':' + this.serverId + ' 当前连接客户端个数为：' + count);
+      console.log('当前连接客户端个数为：' + count);
     });
   }
 }
