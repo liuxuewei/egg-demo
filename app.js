@@ -6,7 +6,6 @@ class AppBootHook {
   constructor(app) {
     this.app = app;
     this.tcpServer = null;
-    this.tcpBroadcastServer = null;
   }
 
   configWillLoad() {
@@ -47,12 +46,10 @@ class AppBootHook {
 
   async didReady() {
     // 应用已经启动完毕
-    if (!this.tcpServer) {
       this.tcpServer = new TcpServer();
-    }
-    if (!this.tcpBroadcastServer) {
-      this.tcpBroadcastServer = new TcpServer('broadcast');
-    }
+    // if (!this.tcpBroadcastServer) {
+    //   this.tcpBroadcastServer = new TcpServer('broadcast');
+    // }
 
 
     // const ctx = await this.app.createAnonymousContext();
@@ -73,7 +70,6 @@ class AppBootHook {
   beforeClose() {
     // 应用服务关闭时，停用TCP服务
     this.tcpServer && this.tcpServer.finishServer();
-    this.tcpBroadcastServer && this.tcpBroadcastServer.finishServer();
   }
 }
 
