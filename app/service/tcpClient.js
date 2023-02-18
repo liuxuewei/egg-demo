@@ -45,22 +45,23 @@ class TcpClient extends Service {
       tcp_receive_broadcast_client.setEncoding(encoding);
       // 连接 tcp server
       const connection = tcp_receive_broadcast_client.connect(broadcastServerOptions, () => {
-        console.log('开始连接广播服务器...');
+        console.log('开始连接广播服务器，并开启监听广播...');
+        tcp_receive_broadcast_client.on('data', data => {
+          const dataString = data.toString(encoding);
+          try {
+            const dataJson = JSON.parse(dataString);
+            console.log('接收到广播: %j', dataJson);
+          } catch (e) {
+            console.log(e);
+          }
+        });
         resolve(true);
       });
       connection.on('error', error => {
         reject(error);
         console.error(error);
       });
-      tcp_receive_broadcast_client.on('data', data => {
-        const dataString = data.toString(encoding);
-        try {
-          const dataJson = JSON.parse(dataString);
-          console.log('接收到广播: %j', dataJson); 
-        } catch (e) {
-          console.log(e);
-        }
-      });
+
     });
   }
   async requestServer(params) {

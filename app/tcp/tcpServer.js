@@ -34,14 +34,15 @@ class TcpServer {
         setInterval(() => {
           // 广播连接状态
           this.broadcast(clientKey + ', 连接广播服务器状态正常!');
-        }, 5000);
+        }, 5 * 60 * 1000);
       } else {
         // 处理客户端消息
         clientSocket.on('data', data => {
           const dataString = data.toString(encoding);
+          console.log('客户端 %s 请求原始数据: %j', clientKey, dataString);
           const dataJson = JSON.parse(dataString);
           clientSocket.setEncoding(encoding);
-          console.log('客户端 %s 请求数据:%j', clientKey, dataJson);
+          console.log('客户端 %s 请求处理数据:%j', clientKey, dataJson);
           const result = { clientKey, type: dataJson.type, traceId: dataJson.traceId };
           if (dataJson.type === 'getMachineTemperature') {
             const cpuTemperature = Number(Math.random() * 100).toFixed(2);
