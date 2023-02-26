@@ -16,7 +16,7 @@ class TcpServer {
     this.server = net.createServer();
     // 监听 端口
     this.server.listen(PORT, () => {
-      console.log( 'TCP服务启动成功，监听端口：' + PORT);
+      console.log('TCP服务启动成功，监听端口：' + PORT);
     });
 
     this.server.on('connection', clientSocket => {
