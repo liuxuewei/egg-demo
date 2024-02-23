@@ -23,7 +23,8 @@
     "egg-view-nunjucks": "^2.2.0",
     "jar2proxy": "^1.0.7",
     "node-zookeeper-dubbo-plus": "^3.0.16",
-    "nodemailer": "^6.4.11"
+    "nodemailer": "^6.4.11",
+    "vm2": "^3.9.19"
   },
   "devDependencies": {
     "autod": "^3.0.1",
